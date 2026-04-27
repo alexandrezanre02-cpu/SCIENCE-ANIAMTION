@@ -1,13 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Science Animation</title>
+    <title>Solar System Animation</title>
+    <style>
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: black; }
+        #solar-system { position: relative; width: 800px; height: 800px; }
+        .planet { position: absolute; border-radius: 50%; }
+        #sun { width: 100px; height: 100px; background: yellow; border: 10px solid orange; } 
+        #earth { width: 25px; height: 25px; background: blue; }
+        #moon { width: 10px; height: 10px; background: gray; }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Science Animation</h1>
-    <p>This is a sample animation showcasing various scientific concepts.</p>
-    <script src="app.js"></script>
+    <div id="solar-system">
+        <div id="sun" class="planet"></div>
+        <div id="earth" class="planet"></div>
+        <div id="moon" class="planet"></div>
+    </div>
+    <script>
+        const sun = document.getElementById('sun');
+        const earth = document.getElementById('earth');
+        const moon = document.getElementById('moon');
+        let earthAngle = 0;
+        let moonAngle = 0;
+        function animate() {
+            earthAngle += 0.01;
+            moonAngle += 0.03;
+            const earthX = 300 * Math.cos(earthAngle);
+            const earthY = 300 * Math.sin(earthAngle);
+            const moonX = 50 * Math.cos(moonAngle);
+            const moonY = 50 * Math.sin(moonAngle);
+            earth.style.transform = `translate(${earthX}px, ${earthY}px)`;
+            moon.style.transform = `translate(${earthX + moonX}px, ${earthY + moonY}px)`;
+        }
+        setInterval(animate, 1000 / 60);
+    </script>
 </body>
 </html>
